@@ -1,5 +1,6 @@
 ---
 import { siteConfig } from '../config/site';
+import MainLayout from '../layouts/MainLayout.astro';
 import SplashScreen from '../components/SplashScreen/SplashScreen.astro';
 import Header from '../components/Header/Header.astro';
 import Hero from '../components/Hero/Hero.astro';
@@ -7,40 +8,39 @@ import About from '../components/About/About.astro';
 import Skills from '../components/Skills/Skills.astro';
 import Footer from '../components/Footer/Footer.astro';
 import BackToTop from '../components/BackToTop/BackToTop.astro';
+
+const pageMeta = {
+	title: siteConfig.meta.title,
+	description: siteConfig.meta.description,
+	keywords: [...siteConfig.meta.keywords],
+	url: siteConfig.meta.url,
+	image: siteConfig.meta.image,
+};
 ---
 
-<html lang="zh-CN">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>{siteConfig.fullName}</title>
-	</head>
-	<body>
-		<SplashScreen />
-		<Header />
-		<main>
-			<Hero />
-			<About />
-			<Skills />
-		</main>
-		<Footer />
-		<BackToTop />
-		<script>
-			if ('scrollRestoration' in history) {
-				history.scrollRestoration = 'manual';
+<MainLayout {...pageMeta}>
+	<SplashScreen />
+	<Header />
+	<main>
+		<Hero />
+		<About />
+		<Skills />
+	</main>
+	<Footer />
+	<BackToTop />
+	<script is:inline>
+		if ('scrollRestoration' in history) {
+			history.scrollRestoration = 'manual';
+		}
+		window.addEventListener('load', () => {
+			window.scrollTo(0, 0);
+			// 清除 URL 中的锚点
+			if (window.location.hash) {
+				history.replaceState(null, '', window.location.pathname + window.location.search);
 			}
-			window.addEventListener('load', () => {
-				window.scrollTo(0, 0);
-				// 清除 URL 中的锚点
-				if (window.location.hash) {
-					history.replaceState(null, '', window.location.pathname + window.location.search);
-				}
-			});
-		</script>
-	</body>
-</html>
+		});
+	</script>
+</MainLayout>
 
 <style is:global>
 	* {

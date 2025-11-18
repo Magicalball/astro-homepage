@@ -4,6 +4,15 @@ export const siteConfig = {
 	fullName: 'Magical_ball(@Skyler Enchanter)',
 	greeting: '你好，我是',
 	subtitle: '一名普通的初级开发者，努力学习中...  Ciallo～(∠・ω< )',
+	meta: {
+		title: 'Magical_ball(@Skyler Enchanter)',
+		description: 'Magical_ball 的个人主页',
+		keywords: ['Magical_ball', '个人主页', '开发者', '博客'],
+		url: 'https://magicalball.top/',
+		image: 'https://magicalball.top/favicon.svg',
+		author: 'Magical_ball',
+		themeColor: '#ffffff',
+	},
 	email: 'hello@example.com',
 	social: {
 		github: {

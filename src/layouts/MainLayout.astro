@@ -1,0 +1,30 @@
+---
+import Head from '../components/Head/Head.astro';
+
+type KeywordInput = string | string[] | readonly string[];
+
+interface Props {
+	title?: string;
+	description?: string;
+	keywords?: KeywordInput;
+	url?: string;
+	image?: string;
+	type?: string;
+	bodyClass?: string;
+}
+
+const { bodyClass = '', ...headProps } = Astro.props as Props;
+---
+
+<html lang="zh-CN">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<Head {...headProps} />
+	</head>
+	<body class={bodyClass}>
+		<slot />
+	</body>
+</html>
+

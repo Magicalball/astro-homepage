@@ -1,0 +1,46 @@
+---
+import { siteConfig } from '../../config/site';
+
+type KeywordInput = string | string[] | readonly string[];
+
+interface HeadProps {
+	title?: string;
+	description?: string;
+	keywords?: KeywordInput;
+	url?: string;
+	image?: string;
+	type?: string;
+}
+
+const {
+	title = siteConfig.meta.title,
+	description = siteConfig.meta.description,
+	keywords = siteConfig.meta.keywords,
+	url = siteConfig.meta.url,
+	image = siteConfig.meta.image,
+	type = 'website',
+} = Astro.props as HeadProps;
+
+let keywordsContent: string | undefined;
+if (typeof keywords === 'string') {
+	keywordsContent = keywords;
+} else if (Array.isArray(keywords)) {
+	keywordsContent = [...keywords].join(', ');
+}
+---
+
+<title>{title}</title>
+<meta name="description" content={description} />
+{keywordsContent && <meta name="keywords" content={keywordsContent} />}
+<meta name="author" content={siteConfig.meta.author} />
+<meta name="theme-color" content={siteConfig.meta.themeColor} />
+<link rel="canonical" href={url} />
+
+<!-- Open Graph -->
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:type" content={type} />
+<meta property="og:url" content={url} />
+<meta property="og:image" content={image} />
+<meta property="og:site_name" content={siteConfig.fullName} />
+
