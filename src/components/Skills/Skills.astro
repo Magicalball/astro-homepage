@@ -1,0 +1,200 @@
+---
+// 技能展示组件
+---
+
+<section id="skills" class="skills">
+	<div class="container">
+		<h2 class="section-title">Skills</h2>
+		<div class="skills-grid" role="list">
+			<div class="skill-cell" role="listitem">
+				<h3 class="skill-name">Developer</h3>
+				<p class="skill-description">JavaScript、React、HTML、WebRTC</p>
+			</div>
+			<div class="skill-cell" role="listitem">
+				<h3 class="skill-name">DevOps</h3>
+				<p class="skill-description">Docker、Nginx、CI/CD</p>
+			</div>
+			<div class="skill-cell" role="listitem">
+				<h3 class="skill-name">Education</h3>
+				<p class="skill-description">Shenyang University of Technology, software engineering</p>
+			</div>
+			<div class="skill-cell" role="listitem">
+				<h3 class="skill-name">Hobby</h3>
+				<p class="skill-description">ACGN、音游、阅读、羽毛球</p>
+			</div>
+		</div>
+	</div>
+</section>
+
+<style>
+	.skills {
+		padding: 6rem 2rem;
+		background: #f8f8f8;
+	}
+
+	.container {
+		max-width: 1200px;
+		margin: 0 auto;
+	}
+
+	.section-title {
+		font-size: 2.5rem;
+		font-weight: 600;
+		color: #1a1a1a;
+		text-align: center;
+		margin: 0 0 4rem 0;
+		letter-spacing: 0.05em;
+		position: relative;
+	}
+
+	.section-title::after {
+		content: '';
+		position: absolute;
+		bottom: -1rem;
+		left: 50%;
+		transform: translateX(-50%);
+		width: 60px;
+		height: 3px;
+		background: #1a1a1a;
+	}
+
+	.skills-grid {
+		position: relative;
+		display: grid;
+		grid-template-columns: repeat(2, minmax(200px, 1fr));
+		border: 1px solid rgba(0, 0, 0, 0.08);
+		border-radius: 20px;
+		overflow: hidden;
+		margin-top: 3rem;
+		background: #ffffff;
+	}
+
+	.skills-grid::before,
+	.skills-grid::after {
+		content: '';
+		position: absolute;
+		background: rgba(0, 0, 0, 0.06);
+	}
+
+	.skills-grid::before {
+		left: 0;
+		right: 0;
+		top: 50%;
+		height: 1px;
+		transform: translateY(-50%);
+	}
+
+	.skills-grid::after {
+		top: 0;
+		bottom: 0;
+		left: 50%;
+		width: 1px;
+		transform: translateX(-50%);
+	}
+
+	.skill-cell {
+		padding: clamp(2rem, 5vw, 3.5rem);
+		text-align: center;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		min-height: 220px;
+		position: relative;
+		z-index: 0;
+		cursor: default;
+		background: radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.8), rgba(248, 248, 248, 0.6));
+		transition: background 0.6s ease, color 0.6s ease, filter 0.6s ease;
+	}
+
+	.skill-cell::after {
+		content: '';
+		position: absolute;
+		inset: 0;
+		border-radius: inherit;
+		background: linear-gradient(120deg, rgba(255, 255, 255, 0.5), transparent);
+		opacity: 0;
+		transition: opacity 0.6s ease;
+		z-index: -1;
+	}
+
+	.skill-cell:hover {
+		filter: brightness(1.05);
+		background: radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.95), rgba(245, 245, 245, 0.85));
+	}
+
+	.skill-cell:hover::after {
+		opacity: 1;
+	}
+
+	.skill-name,
+	.skill-description {
+		transition: color 0.6s ease;
+	}
+
+	.skill-cell:hover .skill-name {
+		color: #111;
+	}
+
+	.skill-cell:hover .skill-description {
+		color: #3d3d3d;
+	}
+
+	.skill-name {
+		font-size: 1.5rem;
+		font-weight: 600;
+		color: #1a1a1a;
+		margin: 0 0 0.75rem 0;
+	}
+
+	.skill-description {
+		font-size: 1rem;
+		color: #6a6a6a;
+		line-height: 1.6;
+		margin: 0;
+	}
+
+	@media (max-width: 768px) {
+		.skills {
+			padding: 4rem 1.5rem;
+		}
+
+		.section-title {
+			font-size: 2rem;
+			margin-bottom: 3rem;
+		}
+
+		.skills-grid {
+			grid-template-columns: 1fr;
+			border-radius: 12px;
+		}
+
+		.skills-grid::before {
+			display: none;
+		}
+
+		.skills-grid::after {
+			width: 100%;
+			height: 1px;
+			left: 0;
+			transform: none;
+		}
+
+		.skill-cell {
+			min-height: auto;
+			border-top: 1px solid rgba(0, 0, 0, 0.06);
+			transition: background 0.3s ease;
+			cursor: default;
+			filter: none;
+		}
+
+		.skill-cell:hover {
+			background: rgba(255, 255, 255, 0.92);
+		}
+
+		.skill-cell:first-child {
+			border-top: none;
+		}
+	}
+</style>
+

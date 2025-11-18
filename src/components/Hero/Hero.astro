@@ -1,0 +1,445 @@
+---
+const signatureText = 'Magical_ball';
+const signatureLetters = signatureText.split('');
+// 主标题区域组件
+---
+
+<section class="hero">
+	<div class="hero-content">
+		<h1 class="hero-title">
+			<span class="greeting fade-seq-1">你好，我是</span>
+			<span class="name handwriting fade-seq-2">
+				<span class="signature-wrapper" aria-hidden="true">
+					{signatureLetters.map((char, index) => (
+						<span class="signature-letter" style={`--letter-index:${index};`} data-char={char}>
+							{char === ' ' ? '\u00A0' : char}
+						</span>
+					))}
+				</span>
+				<span class="signature-fallback" aria-label={signatureText}>{signatureText}</span>
+			</span>
+		</h1>
+		<p class="hero-subtitle fade-seq-3">
+			一名普通的初级开发者，努力学习中...  Ciallo～(∠・ω&lt; )
+		</p>
+		<div class="hero-cta fade-seq-4">
+			<a href="#blog" class="btn btn-primary">博客</a>
+			<a href="#about" class="btn btn-secondary">了解更多</a>
+		</div>
+	</div>
+	<div class="scroll-indicator fade-seq-5">
+		<span class="scroll-text">向下滚动</span>
+		<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+			<path d="M7 13l5 5 5-5M7 6l5 5 5-5"/>
+		</svg>
+	</div>
+</section>
+
+<script>
+	document.addEventListener('DOMContentLoaded', () => {
+		const learnMoreBtn = document.querySelector('.btn-secondary');
+		if (learnMoreBtn) {
+			const handleClick = () => {
+				learnMoreBtn.classList.add('btn-clicked');
+				setTimeout(() => {
+					learnMoreBtn.classList.remove('btn-clicked');
+				}, 300);
+			};
+			learnMoreBtn.addEventListener('click', handleClick);
+			learnMoreBtn.addEventListener('touchend', handleClick);
+		}
+	});
+</script>
+
+<style>
+	@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+
+	.hero {
+		min-height: 100vh;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		text-align: center;
+		padding: 2rem;
+		padding-top: calc(80px + 2rem);
+		position: relative;
+		background: linear-gradient(180deg, #ffffff 0%, #f8f8f8 100%);
+	}
+
+	.hero-content {
+		max-width: 800px;
+		position: relative;
+		z-index: 1;
+	}
+
+	.hero-title {
+		margin: 0 0 1.5rem 0;
+		display: flex;
+		flex-direction: column;
+		gap: 2rem;
+	}
+
+	.greeting {
+		font-size: 1.5rem;
+		font-weight: 300;
+		color: #6a6a6a;
+		letter-spacing: 0.1em;
+	}
+
+	.name {
+		font-size: 4.5rem;
+		font-weight: 600;
+		color: #1a1a1a;
+		letter-spacing: 0.02em;
+		line-height: 1.2;
+	}
+
+	.handwriting {
+		position: relative;
+		display: inline-flex;
+		align-items: center;
+		font-style: italic;
+	}
+
+	.signature-wrapper {
+		display: inline-flex;
+		gap: 0.1em;
+	}
+
+	.signature-letter {
+		position: relative;
+		display: inline-flex;
+		font-family: 'Pacifico', 'Hiragino Sans GB', cursive;
+		font-size: clamp(2.5rem, 6vw, 4.5rem);
+		font-style: italic;
+		color: #1a1a1a;
+		transform-origin: left center;
+		transform: scaleX(0);
+		opacity: 0;
+	}
+
+	.signature-letter[data-char="_"] {
+		letter-spacing: 0.25em;
+	}
+
+	.signature-fallback {
+		position: absolute;
+		left: 50%;
+		transform: translateX(-50%);
+		font-family: 'Pacifico', 'Hiragino Sans GB', cursive;
+		font-size: clamp(2.5rem, 6vw, 4.5rem);
+		font-style: italic;
+		opacity: 0;
+		pointer-events: none;
+	}
+
+	.signature-letter::after {
+		content: '';
+		position: absolute;
+		right: -4px;
+		top: 50%;
+		width: 6px;
+		height: 6px;
+		background: #1a1a1a;
+		border-radius: 50%;
+		transform: translate(0, -50%) scale(0);
+		opacity: 0;
+	}
+
+	:global(.page-ready) .signature-letter {
+		animation: letterReveal 0.4s ease forwards;
+		animation-delay: calc(0.6s + var(--letter-index) * 0.18s);
+	}
+
+	:global(.page-ready) .signature-letter::after {
+		animation: penTrail 0.35s ease forwards;
+		animation-delay: calc(0.6s + var(--letter-index) * 0.18s);
+	}
+
+	.hero-subtitle {
+		font-size: 1.25rem;
+		font-weight: 300;
+		color: #4a4a4a;
+		margin: 3rem 0 3rem 0;
+		line-height: 1.6;
+	}
+
+	.hero-cta {
+		display: flex;
+		gap: 1.5rem;
+		justify-content: center;
+		flex-wrap: wrap;
+	}
+
+	.btn {
+		padding: 0.875rem 2rem;
+		font-size: 1rem;
+		font-weight: 500;
+		text-decoration: none;
+		border-radius: 4px;
+		transition: all 0.3s ease;
+		letter-spacing: 0.05em;
+		border: 2px solid transparent;
+	}
+
+	.btn-primary {
+		background: #1a1a1a;
+		color: #ffffff;
+	}
+
+	.btn-primary:hover {
+		background: #2a2a2a;
+		transform: translateY(-2px);
+		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+	}
+
+	.btn-secondary {
+		background: transparent;
+		color: #1a1a1a;
+		border-color: #1a1a1a;
+	}
+
+	.btn-secondary:hover {
+		background: #1a1a1a;
+		color: #ffffff;
+		transform: translateY(-2px);
+	}
+
+	.btn-secondary:active,
+	.btn-secondary:focus {
+		background: transparent;
+		color: #1a1a1a;
+		transform: translateY(0);
+		outline: none;
+	}
+
+	.btn-secondary.btn-clicked,
+	.btn-secondary.btn-clicked:hover {
+		background: transparent !important;
+		color: #1a1a1a !important;
+		transform: translateY(0) !important;
+		border-color: #1a1a1a !important;
+	}
+
+	.scroll-indicator {
+		position: absolute;
+		bottom: 3rem;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 0.5rem;
+		color: #6a6a6a;
+		font-size: 0.875rem;
+	}
+
+	.scroll-indicator svg {
+		opacity: 0.6;
+		animation: arrowBounce 3.5s ease-in-out infinite;
+		animation-delay: 2.8s;
+	}
+
+	.scroll-text {
+		opacity: 0;
+	}
+
+	:global(.page-ready) .scroll-text {
+		animation: scrollFade 1.2s ease forwards;
+		animation-delay: 2.3s;
+	}
+
+	:global(.page-ready) .scroll-indicator {
+		animation: indicatorFloat 3s ease-in-out infinite;
+		animation-delay: 2.8s;
+	}
+
+	.fade-seq-1,
+	.fade-seq-2,
+	.fade-seq-3,
+	.fade-seq-4,
+	.fade-seq-5 {
+		opacity: 0;
+		transform: translateY(25px);
+	}
+
+	:global(.page-ready) .fade-seq-1,
+	:global(.page-ready) .fade-seq-2,
+	:global(.page-ready) .fade-seq-3,
+	:global(.page-ready) .fade-seq-4,
+	:global(.page-ready) .fade-seq-5 {
+		animation: fadeInSequence 0.8s ease forwards;
+	}
+
+	:global(.page-ready) .fade-seq-1 {
+		animation-delay: 0.2s;
+	}
+
+	:global(.page-ready) .fade-seq-2 {
+		animation-delay: 0.5s;
+	}
+
+	:global(.page-ready) .fade-seq-3 {
+		animation-delay: 1.4s;
+	}
+
+	:global(.page-ready) .fade-seq-4 {
+		animation-delay: 1.8s;
+	}
+
+	:global(.page-ready) .fade-seq-5 {
+		animation-delay: 2.3s;
+		animation-duration: 1.5s;
+	}
+	@keyframes fadeInSequence {
+		from {
+			opacity: 0;
+			transform: translateY(25px);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+
+	@keyframes indicatorFloat {
+		0%, 100% {
+			transform: translateY(0);
+		}
+		50% {
+			transform: translateY(-8px);
+		}
+	}
+
+	@keyframes arrowBounce {
+		0%, 100% {
+			transform: translateY(0);
+			opacity: 0.6;
+		}
+		30% {
+			transform: translateY(0);
+			opacity: 0.6;
+		}
+		50% {
+			transform: translateY(8px);
+			opacity: 0.8;
+		}
+		70% {
+			transform: translateY(0);
+			opacity: 0.6;
+		}
+	}
+
+	@keyframes textPulse {
+		0%, 100% {
+			opacity: 1;
+			transform: translateY(0);
+		}
+		50% {
+			opacity: 0.7;
+			transform: translateY(-3px);
+		}
+	}
+
+*** End Patch
+
+	@keyframes heroBgFade {
+		from {
+			opacity: 0;
+		}
+		to {
+			opacity: 1;
+		}
+	}
+
+	@keyframes scrollFade {
+		from {
+			opacity: 0;
+			transform: translateY(10px);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+
+	@keyframes letterReveal {
+		from {
+			transform: scaleX(0);
+			opacity: 0.2;
+		}
+		to {
+			transform: scaleX(1);
+			opacity: 1;
+		}
+	}
+
+	@keyframes penTrail {
+		0% {
+			transform: translate(0, -50%) scale(0);
+			opacity: 0;
+		}
+		30% {
+			transform: translate(0, -50%) scale(1);
+			opacity: 1;
+		}
+		100% {
+			transform: translate(12px, -50%) scale(0);
+			opacity: 0;
+		}
+	}
+
+	@media (max-width: 768px) {
+		.greeting {
+			font-size: 1.25rem;
+		}
+
+		.name {
+			font-size: 3rem;
+		}
+
+		.signature-wrapper {
+			width: 100%;
+		}
+
+		.hero-subtitle {
+			font-size: 1.1rem;
+		}
+
+		.btn {
+			padding: 0.75rem 1.5rem;
+			font-size: 0.9rem;
+		}
+
+		.btn-secondary.btn-clicked,
+		.btn-secondary.btn-clicked:hover {
+			background: transparent !important;
+			color: #1a1a1a !important;
+			transform: translateY(0) !important;
+			border-color: #1a1a1a !important;
+		}
+	}
+
+	@media (max-width: 480px) {
+		.name {
+			font-size: 2.5rem;
+		}
+
+		.hero-cta {
+			flex-direction: column;
+			width: 100%;
+		}
+
+		.btn {
+			width: 100%;
+		}
+
+		.btn-secondary.btn-clicked,
+		.btn-secondary.btn-clicked:hover {
+			background: transparent !important;
+			color: #1a1a1a !important;
+			transform: translateY(0) !important;
+			border-color: #1a1a1a !important;
+		}
+	}
+</style>
+
