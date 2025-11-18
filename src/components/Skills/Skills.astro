@@ -1,61 +1,28 @@
 ---
+import { siteConfig } from '../../config/site';
 // 技能展示组件
 ---
 
 <section id="skills" class="skills">
 	<div class="container">
-		<h2 class="section-title">Skills</h2>
+		<h2 class="section-title">{siteConfig.skills.title}</h2>
 		<div class="skills-grid" role="list">
-			<div class="skill-cell" role="listitem">
-				<h3 class="skill-name">Developer</h3>
-				<p class="skill-description">JavaScript、React、HTML、WebRTC</p>
-			</div>
-			<div class="skill-cell" role="listitem">
-				<h3 class="skill-name">DevOps</h3>
-				<p class="skill-description">Docker、Nginx、CI/CD</p>
-			</div>
-			<div class="skill-cell" role="listitem">
-				<h3 class="skill-name">Education</h3>
-				<p class="skill-description">Shenyang University of Technology, software engineering</p>
-			</div>
-			<div class="skill-cell" role="listitem">
-				<h3 class="skill-name">Hobby</h3>
-				<p class="skill-description">ACGN、音游、阅读、羽毛球</p>
-			</div>
+			{siteConfig.skills.items.map((skill) => (
+				<div class="skill-cell" role="listitem">
+					<h3 class="skill-name">{skill.name}</h3>
+					<p class="skill-description">{skill.description}</p>
+				</div>
+			))}
 		</div>
 	</div>
 </section>
 
 <style>
+	@import '../../styles/shared.css';
+
 	.skills {
 		padding: 6rem 2rem;
 		background: #f8f8f8;
-	}
-
-	.container {
-		max-width: 1200px;
-		margin: 0 auto;
-	}
-
-	.section-title {
-		font-size: 2.5rem;
-		font-weight: 600;
-		color: #1a1a1a;
-		text-align: center;
-		margin: 0 0 4rem 0;
-		letter-spacing: 0.05em;
-		position: relative;
-	}
-
-	.section-title::after {
-		content: '';
-		position: absolute;
-		bottom: -1rem;
-		left: 50%;
-		transform: translateX(-50%);
-		width: 60px;
-		height: 3px;
-		background: #1a1a1a;
 	}
 
 	.skills-grid {
@@ -157,11 +124,6 @@
 	@media (max-width: 768px) {
 		.skills {
 			padding: 4rem 1.5rem;
-		}
-
-		.section-title {
-			font-size: 2rem;
-			margin-bottom: 3rem;
 		}
 
 		.skills-grid {

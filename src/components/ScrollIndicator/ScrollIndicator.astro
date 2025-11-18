@@ -1,0 +1,83 @@
+---
+// 滚动指示器组件
+---
+
+<div class="scroll-indicator fade-seq-5">
+	<span class="scroll-text">向下滚动</span>
+	<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+		<path d="M7 13l5 5 5-5M7 6l5 5 5-5"/>
+	</svg>
+</div>
+
+<style>
+	.scroll-indicator {
+		position: absolute;
+		bottom: 3rem;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 0.5rem;
+		color: #6a6a6a;
+		font-size: 0.875rem;
+	}
+
+	.scroll-indicator svg {
+		opacity: 0.6;
+		animation: arrowBounce 3.5s ease-in-out infinite;
+		animation-delay: 2.8s;
+	}
+
+	.scroll-text {
+		opacity: 0;
+	}
+
+	:global(.page-ready) .scroll-text {
+		animation: scrollFade 1.2s ease forwards;
+		animation-delay: 2.3s;
+	}
+
+	:global(.page-ready) .scroll-indicator {
+		animation: indicatorFloat 3s ease-in-out infinite;
+		animation-delay: 2.8s;
+	}
+
+	@keyframes indicatorFloat {
+		0%, 100% {
+			transform: translateY(0);
+		}
+		50% {
+			transform: translateY(-8px);
+		}
+	}
+
+	@keyframes arrowBounce {
+		0%, 100% {
+			transform: translateY(0);
+			opacity: 0.6;
+		}
+		30% {
+			transform: translateY(0);
+			opacity: 0.6;
+		}
+		50% {
+			transform: translateY(8px);
+			opacity: 0.8;
+		}
+		70% {
+			transform: translateY(0);
+			opacity: 0.6;
+		}
+	}
+
+	@keyframes scrollFade {
+		from {
+			opacity: 0;
+			transform: translateY(10px);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+</style>
+
