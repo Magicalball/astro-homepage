@@ -73,7 +73,9 @@ export const siteConfig = {
 		],
 	},
 	footer: {
-		copyright: '© 2025 Made by Magical_ball',
+		copyright: `© ${new Date().getFullYear()} Made by Magical_ball`,
+		beian: '辽ICP备2024038289号-1',
+		beianUrl: 'https://beian.miit.gov.cn/',
 	},
 } as const;
 

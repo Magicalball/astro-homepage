@@ -71,27 +71,14 @@ import { siteConfig } from '../../config/site';
 		z-index: 0;
 		cursor: default;
 		background: radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.8), rgba(248, 248, 248, 0.6));
-		transition: background 0.6s ease, color 0.6s ease, filter 0.6s ease;
-	}
-
-	.skill-cell::after {
-		content: '';
-		position: absolute;
-		inset: 0;
-		border-radius: inherit;
-		background: linear-gradient(120deg, rgba(255, 255, 255, 0.5), transparent);
-		opacity: 0;
-		transition: opacity 0.6s ease;
-		z-index: -1;
+		transition: background 0.6s ease, color 0.6s ease, filter 0.6s ease, transform 0.6s ease, box-shadow 0.6s ease;
 	}
 
 	.skill-cell:hover {
-		filter: brightness(1.05);
-		background: radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.95), rgba(245, 245, 245, 0.85));
-	}
-
-	.skill-cell:hover::after {
-		opacity: 1;
+		filter: brightness(1.02);
+		background: radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.88), rgba(248, 248, 248, 0.7));
+		transform: translateY(-6px) scale(1.01);
+		box-shadow: 0 25px 40px rgba(0, 0, 0, 0.08), inset 0 0 20px rgba(255, 255, 255, 0.25);
 	}
 
 	.skill-name,
@@ -104,7 +91,7 @@ import { siteConfig } from '../../config/site';
 	}
 
 	.skill-cell:hover .skill-description {
-		color: #3d3d3d;
+		color: #2c2c2c;
 	}
 
 	.skill-name {
@@ -142,16 +129,20 @@ import { siteConfig } from '../../config/site';
 			transform: none;
 		}
 
-		.skill-cell {
+	.skill-cell {
 			min-height: auto;
 			border-top: 1px solid rgba(0, 0, 0, 0.06);
 			transition: background 0.3s ease;
 			cursor: default;
 			filter: none;
+			transform: none;
+			box-shadow: none;
 		}
 
 		.skill-cell:hover {
-			background: rgba(255, 255, 255, 0.92);
+			background: rgba(255, 255, 255, 0.95);
+			transform: translateY(-2px);
+			box-shadow: 0 12px 25px rgba(0, 0, 0, 0.08);
 		}
 
 		.skill-cell:first-child {
