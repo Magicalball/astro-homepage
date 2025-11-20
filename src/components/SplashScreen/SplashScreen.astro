@@ -47,6 +47,10 @@
 			hideTimeout = window.setTimeout(() => {
 				splashScreen.style.display = 'none';
 				document.body.classList.add('page-ready');
+				const siteShell = document.querySelector('.site-shell');
+				if (siteShell) {
+					(siteShell as HTMLElement).setAttribute('aria-hidden', 'false');
+				}
 				// 恢复页面滚动
 				document.body.style.overflow = '';
 				document.documentElement.style.overflow = '';
