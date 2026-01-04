@@ -37,7 +37,7 @@ export const siteConfig = {
 	buttons: {
 		primary: {
 			text: '博客',
-			href: '#blog',
+			href: 'https://blog.magicalball.top/',
 		},
 		secondary: {
 			text: '了解更多',
